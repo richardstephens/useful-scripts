@@ -15,7 +15,14 @@ pod = list(filter(lambda x: x != '', lines[ln].split(" ")))
 
 while True:
     c = raw_input("Enter command: ")
+    if c == "describe":
+        subprocess.call(["kubectl", "describe", "pod", pod[1], "-n", pod[0]])
     if c == "logs":
         subprocess.call(["kubectl", "logs", pod[1], "-n", pod[0]])
+    if c == "secrets":
+        subprocess.call(["kubectl", "get", "secrets", "-n", pod[0]])
     if c == "shell":
         subprocess.call(["kubectl", "exec", "-it", pod[1], "-n", pod[0], "--", "/bin/bash"])
+    if c == "delete":
+        subprocess.call(["kubectl", "delete", "pod", pod[1], "-n", pod[0]])
+        
